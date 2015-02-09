@@ -21,6 +21,7 @@
 		};
 		
 		
+		
 		comments = {
 			patterns = (
 				{	name = 'comment.line.double-slash.cubescript';
@@ -31,6 +32,7 @@
 			);
 		};
 		
+		
 		values = {
 			patterns = (
 				{	include = '#string'; },
@@ -38,6 +40,7 @@
 				{	include = '#variable'; },
 			);
 		};
+		
 		string = {
 			patterns = (
 				{	name = 'string.quoted.double.cubescript';
@@ -46,11 +49,20 @@
 					beginCaptures = { 0 = { name = 'punctuation.definition.string.begin.cubescript'; }; };
 					endCaptures = { 0 = { name = 'punctuation.definition.string.end.cubescript'; }; };
 					patterns = (
+						// escape characters
 						{	name = 'constant.character.escape.cubescript';
-							match = '\^.';
+							match = '\^[fnt"\^]';
 						},
+						{	name = 'invalid.illegal.escape.unknown.cubescript';
+							match = '\^(.|\n|\r)';
+						},
+						// placeholder characters
 						{	name = 'constant.other.placeholder.cubescript';
-							match = '%.';
+							match = '%[1-9%]';
+						},
+						// illegal characters
+						{	name = 'invalid.illegal.string.newline.cubescript';
+							match = '[\n\r]';
 						},
 					);
 				},
@@ -64,6 +76,7 @@
 				},
 			);
 		};
+		
 		variable = {
 			patterns = (
 				{	name = 'variable.other.cubescript';
@@ -71,6 +84,7 @@
 				},
 			);
 		};
+		
 		
 		support = {
 			patterns = (
@@ -82,6 +96,7 @@
 				},
 			);
 		};
+		
 		
 		keywords = {
 			patterns = (
@@ -109,6 +124,7 @@
 			);
 		};
 		
+		
 		blocks = {
 			patterns = (
 				{	include = '#brackets'; },
@@ -127,6 +143,7 @@
 			end = '\)';
 			patterns = ( { include = '#code'; } );
 		};
+		
 		
 		functions = {
 			patterns = (
