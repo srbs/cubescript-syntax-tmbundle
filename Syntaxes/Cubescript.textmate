@@ -33,6 +33,13 @@
 		
 		values = {
 			patterns = (
+				{	include = '#string'; },
+				{	include = '#number'; },
+				{	include = '#variable'; },
+			);
+		};
+		string = {
+			patterns = (
 				{	name = 'string.quoted.double.cubescript';
 					begin = '"';
 					end = '"';
@@ -47,9 +54,18 @@
 						},
 					);
 				},
+			);
+		};
+
+		number = {
+			patterns = (
 				{	name = 'constant.numeric.cubescript';
 					match = '(\b0[xX][0-9a-fA-F]+\b)|[+-]?((\b[0-9]+)?\.)?\b[0-9]+([eE][+-]?[0-9]+)?\b';
 				},
+			);
+		};
+		variable = {
+			patterns = (
 				{	name = 'variable.other.cubescript';
 					match = '(\$|(\@)+)[^\s\(\)\[\];]*';
 				},
