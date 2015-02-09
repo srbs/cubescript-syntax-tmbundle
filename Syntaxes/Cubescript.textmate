@@ -15,8 +15,7 @@
 				{	include = '#values'; },
 				{	include = '#support'; },
 				{	include = '#keywords'; },
-				{	include = '#block'; },
-				{	include = '#parens'; },
+				{	include = '#blocks'; },
 				{	include = '#functions'; },
 			);
 		};
@@ -67,6 +66,7 @@
 				},
 			);
 		};
+		
 		keywords = {
 			patterns = (
 				{	name = 'keyword.control.cubescript';
@@ -93,8 +93,14 @@
 			);
 		};
 		
-		block = {
-			name = 'meta.block.cubescript';
+		blocks = {
+			patterns = (
+				{	include = '#brackets'; },
+				{	include = '#parens'; },
+			);
+		};
+		brackets = {
+			name = 'meta.brackets.cubescript';
 			begin = '\[';
 			end = '\]';
 			patterns = ( { include = '#code'; } );
