@@ -71,8 +71,37 @@
 
 		number = {
 			patterns = (
-				{	name = 'constant.numeric.cubescript';
-					match = '(\b0[xX][0-9a-fA-F]+\b)|[+-]?((\b[0-9]+)?\.)?\b[0-9]+([eE][+-]?[0-9]+)?\b';
+				{	name = 'constant.numeric.hex.cubescript';
+					match = '\b0[xX][\h]+\b(?!\.)';
+				},
+				{	name = 'constant.numeric.octal.cubescript';
+					match = '\b0[0-7]+\b';
+				},
+				{	name = 'constant.numeric.integer.cubescript';
+					match = '\b[0-9]+\b(?!\.)';
+				},
+				{	name = 'constant.numeric.hex-float.cubescript';
+					match = '(?x)
+						(?<!\w)                    # Ensure word boundary
+						0[xX]                      # Start literal
+						(
+							\.[\h]+                # Allow starting .
+							| [\h]+(\.[\h]*)?      # Allow leading digits & optional suffix
+						)
+						([pP][+-]?[0-9]+)?         # Exponent
+						(?!\w)                     # Ensure word boundry
+					';
+				},
+				{	name = 'constant.numeric.float.cubescript';
+					match = '(?x)
+						(?<!\w)                    # Ensure word boundary
+						(
+							\.[0-9]+               # Allow starting .
+							| [0-9]+(\.[0-9]*)?    # Allow leading digits & optional suffix
+						)
+						([eE][+-]?[0-9]+)?         # Exponent
+						(?!\w)                     # Ensure word boundry
+					';
 				},
 			);
 		};
