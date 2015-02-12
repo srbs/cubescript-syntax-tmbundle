@@ -37,6 +37,7 @@
 			patterns = (
 				{	include = '#string'; },
 				{	include = '#number'; },
+				{	include = '#language_vars'; },
 				{	include = '#variable'; },
 			);
 		};
@@ -65,6 +66,17 @@
 							match = '[\n\r]';
 						},
 					);
+				},
+			);
+		};
+		
+		language_vars = {
+			// some day support built-in function callbacks?
+			// multiplayer:   intermission, mapstart, demostart, demoend, gamehud, edithud, allowedittoggle
+			// single player: can_teleport_[0-9]+, level_trigger_[0-9]+, monster_dead_[0-9]+
+			patterns = (
+				{	name = 'variable.language.cubescript';
+					match = '(\@+|\$)(arg[1-9][0-9]*|numargs|guirollovername|guirolloveraction|guirolloverimgpath|guirolloverimgaction|commandbuf)';
 				},
 			);
 		};
