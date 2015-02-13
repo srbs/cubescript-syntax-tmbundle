@@ -17,6 +17,7 @@
 				{	include = '#keywords'; },
 				{	include = '#blocks'; },
 				{	include = '#functions'; },
+				{	include = '#invalid'; },
 			);
 		};
 		
@@ -172,17 +173,25 @@
 				{	include = '#parens'; },
 			);
 		};
+		
 		brackets = {
-			name = 'meta.brackets.cubescript';
-			begin = '\[';
-			end = '\]';
-			patterns = ( { include = '#code'; } );
+			patterns = (
+				{	name = 'meta.brackets.cubescript';
+					begin = '\[';
+					end = '\]';
+					patterns = ( { include = '#code'; } );
+				},
+			);
 		};
+		
 		parens = {
-			name = 'meta.parens.cubescript';
-			begin = '\(';
-			end = '\)';
-			patterns = ( { include = '#code'; } );
+			patterns = (
+				{	name = 'meta.parens.cubescript';
+					begin = '\(';
+					end = '\)';
+					patterns = ( { include = '#code'; } );
+				},
+			);
 		};
 		
 		
@@ -200,6 +209,15 @@
 						2 = { name = 'entity.name.function.cubescript'; };
 					};
 					patterns = ( { include = '#code'; } );
+				},
+			);
+		};
+		
+		
+		invalid = {
+			patterns = (
+				{	name = 'invalid.illegal.character.cubescript';
+					match = '[\)\]]';
 				},
 			);
 		};
