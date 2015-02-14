@@ -1,6 +1,9 @@
 // name:          Cubescript
 // keyEquivalent: ^~C (Ctrl+Option+Shift+C)
 
+// Valid function/alias names regex: [^\s\(\)\[\];]+)
+// - cannot consist of (, ), [, ], ;, or whitespace
+
 {	scopeName = 'source.cubescript';
 	fileTypes = ( 'cfg' );
 	foldingStartMarker = '\[[^\[\]]*(//.*)?$';
@@ -223,19 +226,20 @@
 		
 		functions = {
 			patterns = (
-				{	name = 'meta.function.cubescript';
+				{	name = 'meta.function.equals.cubescript';
 					begin = '(?x)
-					^(\s*)              # `\n `
-					([^\s\(\)\[\];]*)   # the name cannot consist of (, ), [, ], ;, or whitespace
-					(?=\s+=\s+\[)       # ` = [`
+						^\s*
+						([^\s\(\)\[\];]+) # name
+						\s+(=)\s+         # assignment
+						(?=\[)            # functions must use []s
 					';
 					end = '(?<=\])';
 					beginCaptures = {
-						1 = { name = 'punctuation.whitespace.function.leading.cubescript'; };
-						2 = { name = 'entity.name.function.cubescript'; };
+						1 = { name = 'entity.name.function.cubescript'; };
+						2 = { name = 'keyword.operator.assignment.cubescript'; };
 					};
-					patterns = ( { include = '#code'; } );
-				},
+					patterns = ( { include = '#brackets'; } );
+				}
 			);
 		};
 		
