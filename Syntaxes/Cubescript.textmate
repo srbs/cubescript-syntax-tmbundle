@@ -135,6 +135,7 @@
 		advanced_support = {
 			patterns = (
 				{	include = '#binds'; },
+				{	include = '#guis'; },
 			);
 		};
 		
@@ -153,6 +154,20 @@
 						},
 					);
 				},
+			);
+		};
+		
+		guis = {
+			patterns = (
+				{	name = 'meta.function.gui.cubescript';
+					begin = '\b(newgui)\s+([^\$\@\(\[;][^\s;]*)\s+(?=\[)';
+					end = '(?<=\])';
+					beginCaptures = {
+						1 = { name = 'support.function.cubescript'; };
+						2 = { name = 'entity.name.gui.cubescript'; };
+					};
+					patterns = ( { include = '#brackets'; } );
+				}
 			);
 		};
 		
