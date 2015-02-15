@@ -119,11 +119,11 @@
 				{	name = 'meta.definition.variable.cubescript';
 					// variable dereferencing must occur after
 					// 1) whitespace; 2) opening/closing of []/(); 3) after a string ends;
-					begin = '(?<=[ \t\n\[\]\(\)"])(\$|\@+)';
+					begin = '(^|(?<=[ \t\n\[\]\(\)"]))(\$|\@+)';
 					// variable dereferencing ends before
 					// 1) whitespace; 2) EOL or semicolon; 3) closing of []/();
 					end = '(\s+|$|(?=[;\)\]]))';
-					beginCaptures = { 1 = { name = 'variable.dereference.cubescript'; }; };
+					beginCaptures = { 2 = { name = 'variable.dereference.cubescript'; }; };
 					patterns = (
 						// language feature variables
 						// ?? TODO mark as 'support.variable.cubescript'
