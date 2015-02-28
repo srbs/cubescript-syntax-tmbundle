@@ -1,8 +1,9 @@
 // name:          Cubescript
 // keyEquivalent: ^~C (Ctrl+Option+Shift+C)
 
-// Valid function/alias names regex: [^\s\(\)\[\];]+)
-// - cannot consist of (, ), [, ], ;, or whitespace
+// rules:
+// - alias names cannot contain (, ), [, ], ;, or whitespace
+// - function names cannot contain ", $, @, (, ), [, ], ;, or whitespace
 
 {	scopeName = 'source.cubescript';
 	fileTypes = ( 'cfg' );
@@ -200,12 +201,28 @@
 		
 		functions = {
 			patterns = (
-				{	name = 'meta.definition.function.equals.cubescript';
+				{	name = 'meta.definition.function.alias.cubescript';
+					// support `alias <name> [...]`
 					begin = '(?x)
-						^\s*
-						([^\s\(\)\[\];]+) # name
-						\s+(=)\s+         # assignment
-						(?=\[)            # functions must use []s
+						^
+						(alias)\s+
+						([^\s"\$\@\(\)\[\];]+)
+						\s+(?=\[)
+					';
+					end = '(?<=\])';
+					beginCaptures = {
+						1 = { name = 'keyword.operator.assignment.cubescript'; };
+						2 = { name = 'entity.name.function.cubescript'; };
+					};
+					patterns = ( { include = '#brackets'; } );
+				},
+				{	name = 'meta.definition.function.equals.cubescript';
+					// support `<name> = [...]`
+					begin = '(?x)
+						^
+						([^\s"\$\@\(\)\[\];]+)
+						\s+(=)\s+
+						(?=\[)
 					';
 					end = '(?<=\])';
 					beginCaptures = {
